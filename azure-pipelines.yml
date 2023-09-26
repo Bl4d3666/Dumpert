@@ -37,15 +37,6 @@ steps:
     platform: 'x64'
     configuration: '$(buildConfiguration)'
 
-- task: PowerShell@2
-  displayName: 'Install windows-sdk-8.1 '
-  inputs:
-    targetType: 'inline'
-    script: |
-     echo $(system.defaultworkingdirectory)
-     echo '$(BuildConfiguration)\'
-     echo $(build.artifactstagingdirectory)
-
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
   inputs:
