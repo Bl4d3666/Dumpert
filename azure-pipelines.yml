@@ -36,18 +36,11 @@ steps:
     platform: 'x64'
     configuration: '$(buildConfiguration)'
 
-- task: PowerShell@2
-  displayName: 'Move File to Deta'
-  inputs:
-    targetType: 'inline'
-    script: |
-      echo $(system.defaultworkingdirectory)
-
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
   inputs:
     SourceFolder: '$(system.defaultworkingdirectory)'
-    Contents: '**\bin\$(BuildConfiguration)\**'
+    Contents: '**\Release\$(BuildConfiguration)\**'
     TargetFolder: '$(build.artifactstagingdirectory)'
   condition: succeededOrFailed()
 
