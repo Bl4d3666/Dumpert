@@ -24,17 +24,27 @@ steps:
     feedsToUse: 'select'
 
 - task: PowerShell@2
-  displayName: 'Move File to Deta'
+  displayName: 'Install windows-sdk-8.1 '
   inputs:
     targetType: 'inline'
     script: |
      choco install windows-sdk-8.1 
+
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)" /p:TargetFrameworkVersion=v4.7.2'
     platform: 'x64'
     configuration: '$(buildConfiguration)'
+
+- task: PowerShell@2
+  displayName: 'Install windows-sdk-8.1 '
+  inputs:
+    targetType: 'inline'
+    script: |
+     echo $(system.defaultworkingdirectory)
+     echo '$(BuildConfiguration)\'
+     echo $(build.artifactstagingdirectory)
 
 - task: CopyFiles@2
   displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
